@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // If everything is fine, proceed to handle the form submission
     // Define the recipient email address (replace with your email address)
-    $to = "davidkomla0247636030@gmail.com";
+    $to = "davidkomla0247363060@gmail.com";
     $subject = "New message from: $name";
     $body = "You have received a new message from $name ($email):\n\n$message";
     $headers = "From: $email" . "\r\n" .
