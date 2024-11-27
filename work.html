@@ -1,41 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautiful Project Images</title>
+    <title>My Work - David Komla</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h1 {
+            margin-top: 0;
+        }
+
+        .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px;
-            background-color: #f8f9fa;
+            gap: 10px;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .gallery img {
+            width: 100%;
+            max-width: 48%;
+            border-radius: 8px;
         }
 
-        img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
         }
 
-        .image-container {
-            width: 300px; /* Adjust as per your design */
-            padding: 10px;
+        .btn:hover {
+            background: #0056b3;
         }
     </style>
 </head>
+
 <body>
-    <div class="image-container">
+    <header>
+        <h1>Explore My Work</h1>
+    </header>
+    <div class="content">
+        <h1>Crafting Digital Experiences</h1>
+        <p>
+            My work spans multiple fields, from web development and mobile apps to creative designs and automation
+            solutions. Each project is tailored to meet specific goals and deliver outstanding results.
+        </p>
+        <h2>Portfolio Highlights</h2>
+        <div class="image-container">
         <img src="images/cyb.jpeg" alt="Project 1">
     </div>
     <div class="image-container">
@@ -47,5 +84,12 @@
     <div class="image-container">
         <img src="images/farm.jpeg" alt="Project 4">
     </div>
+        </div>
+        <p>
+            Ready to collaborate on something extraordinary? <a href="hire.html" class="btn">Hire Me</a>
+        </p>
+        <a href="index.html" class="btn">Back to Home</a>
+    </div>
 </body>
+
 </html>
