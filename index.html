@@ -1192,101 +1192,50 @@
 						solutions.</p>
 				</div>
 			</div>
-	
+
 			<div class="row block-9">
 				<div class="col-md-8">
-					<form action="#" class="bg-light p-3 contact-form" style="border-radius: 10px; border: 1px solid #ccc;">
+					<form id="contactForm" class="bg-light p-3 contact-form"
+						style="border-radius: 10px; border: 1px solid #ccc;">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Your Name"
-										style="border-radius: 5px;">
+									<input type="text" id="name" class="form-control" placeholder="Your Name"
+										style="border-radius: 5px;" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="email" class="form-control" placeholder="Your Email"
-										style="border-radius: 5px;">
+									<input type="email" id="email" class="form-control" placeholder="Your Email"
+										style="border-radius: 5px;" required>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Subject"
-										style="border-radius: 5px;">
+									<input type="text" id="subject" class="form-control" placeholder="Subject"
+										style="border-radius: 5px;" required>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<textarea name="" id="" cols="30" rows="4" class="form-control" placeholder="Message"
-										style="border-radius: 5px;"></textarea>
+									<textarea id="message" cols="30" rows="4" class="form-control" placeholder="Message"
+										style="border-radius: 5px;" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="submit" value="Send Message" class="btn btn-primary py-2 px-4"
-										style="border-radius: 5px; background-color: #007bff;">
+									<button type="submit" class="btn btn-primary py-2 px-4"
+										style="border-radius: 5px; background-color: #007bff;">Send Message</button>
 								</div>
 							</div>
 						</div>
 					</form>
-				</div>
-	
-				<div class="col-md-4 d-flex pl-md-5">
-					<div class="row">
-						<div class="dbox w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"
-								style="background-color: #007bff; color: white; padding: 8px; border-radius: 50%;">
-								<span class="fa fa-map-marker"></span>
-							</div>
-							<div class="text">
-								<p><span style="font-weight: bold;">Address:</span> <a href="Ho Dome" style="color: black;">Ho Dome</a></a> </p>
-							</div>
-						</div>
-						<div class="dbox w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"
-								style="background-color: #007bff; color: white; padding: 8px; border-radius: 50%;">
-								<span class="fa fa-phone"></span>
-							</div>
-							<div class="text">
-								<p><span style="font-weight: bold;">Phone:</span> <a href="tel://+233247363060"
-										style="color: black;">+233 247363060</a></p>
-							</div>
-						</div>
-						<div class="dbox w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"
-								style="background-color: #007bff; color: white; padding: 8px; border-radius: 50%;">
-								<span class="fa fa-paper-plane"></span>
-							</div>
-							<div class="text">
-								<p><span style="font-weight: bold;">Email:</span> <a href="mailto:komladavid@yourdomain.com"
-										style="color: black;">davidkomla0242363060@gmail.com</a></p>
-							</div>
-						</div>
-						<div class="dbox w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"
-								style="background-color: #007bff; color: white; padding: 8px; border-radius: 50%;">
-								<span class="fa fa-globe"></span>
-							</div>
-							<div class="text">
-								<p><span style="font-weight: bold;">Website:</span> <a href="#"
-										style="color: black;">davidkomla.com</a></p>
-							</div>
-						</div>
-						<div class="dbox w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"
-								style="background-color: #007bff; color: white; padding: 8px; border-radius: 50%;">
-								<span class="fa fa-whatsapp"></span>
-							</div>
-							<div class="text">
-								<p><span style="font-weight: bold;">WhatsApp:</span> <a href="https://wa.me/+233247363060"
-										target="_blank" style="color: black;">Chat with me</a></p>
-							</div>
-						</div>
-					</div>
+					<div id="status" style="margin-top: 10px;"></div>
 				</div>
 			</div>
 		</div>
 	</section>
+
 
 
 	<footer class="ftco-footer ftco-section" style="padding: 20px 0; font-size: 14px;">
@@ -1373,6 +1322,53 @@
 	</footer>
 
 
+         <script>
+document.getElementById("contactForm").addEventListener("submit", function (event) {
+	event.preventDefault(); // Prevent form from refreshing the page
+
+	// Collect form data
+	const name = document.getElementById("name").value;
+	const email = document.getElementById("email").value;
+	const subject = document.getElementById("subject").value;
+	const message = document.getElementById("message").value;
+
+	// Brevo API payload
+	const payload = {
+		sender: { email: "davidkomla970@yahoo.com", name: "David Komla" },
+		to: [{ email: "davidkomla970@yahoo.com", name: "David Komla" }],
+		subject: subject,
+		htmlContent: `
+			<p><strong>Name:</strong> ${name}</p>
+			<p><strong>Email:</strong> ${email}</p>
+			<p><strong>Message:</strong> ${message}</p>
+		`
+	};
+
+	// API request to Brevo
+	fetch("https://api.brevo.com/v3/smtp/email", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"api-key": "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",
+		},
+		body: JSON.stringify(payload),
+	})
+		.then((response) => {
+			if (response.ok) {
+				document.getElementById("status").innerHTML = "<p style='color: green;'>Email sent successfully!</p>";
+				document.getElementById("contactForm").reset();
+			} else {
+				document.getElementById("status").innerHTML = "<p style='color: red;'>Failed to send email. Please try again later.</p>";
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+			document.getElementById("status").innerHTML = "<p style='color: red;'>An error occurred. Please try again later.</p>";
+		});
+});
+</script>
+
+	
 	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places" async
 		defer></script>
 
